@@ -4,6 +4,8 @@ import { Text, Alert, View, Image, AsyncStorage, StyleSheet, SafeAreaView, Touch
 
 import logo from '../assets/logo.png';
 
+import { API_URL } from 'react-native-dotenv';
+
 import SpotList from '../components/SpotList';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -19,7 +21,7 @@ export default function List({ navigation }) {
 
     useEffect(() => {
         AsyncStorage.getItem('user').then(user_id => {
-            const socket = socketio('http://192.168.1.104:3333', {
+            const socket = socketio(API_URL, {
                 query: { user_id }
             });
 
