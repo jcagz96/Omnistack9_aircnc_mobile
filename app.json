@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AirCnC",
-    "slug": "mobile",
+    "slug": "mobile_aircnc",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -29,6 +29,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "An app where you can ask a company  to schedule a day to learn programming languages in their officies. They accept or reject",
+    "githubUrl": "https://github.com/jcagz96/Omnistack9_aircnc_mobile"
   }
 }
