@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, AsyncStorage, Alert, SafeAreaView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import api from '../services/api';
 
