@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text, AsyncStorage, Alert, SafeAreaView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
 
 import api from '../services/api';
 
 export default function Book({ navigation }) {
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(new Date());
+
+    //const [showDatePicker, setShowDatePicker] = useState(true);
 
     const id = navigation.getParam('id');
 
     async function handleSubmit() {
         const user_id = await AsyncStorage.getItem('user');
+
+        /*
+        console.log(`data------>${date}`);
+        console.log(`>>>>>> ${typeof date}`);
+
+        const novaData = moment(date, 'DD-MM-YYYY H:mm:ss:a');
+
+        console.log(`>>>>>> ${typeof novaData}`);
+        console.log(`>>.>> ${novaData.toDate()}`);
+        */
+
+
 
         await api.post(`/spots/${id}/bookings`, {
             date
@@ -28,17 +43,50 @@ export default function Book({ navigation }) {
     }
 
 
+
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.label}>DATA DE INTERESSE *</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Qual data voce quer reservar?"
-                placeholderTextColor="#999"
-                autoCapitalize="words"
-                autoCorrect={false}
-                value={date}
-                onChangeText={setDate}
+
+            <DatePicker
+                style={{
+                    width: 300,
+                    marginBottom: 10
+                }}
+                date={date}
+                mode="datetime"
+                placeholder="select date"
+                format="DD-MM-YYYY H:mm:ss:a"
+                minDate="05-01-2018 00:00:00:pm"
+                maxDate="06-12-2019 00:00:00:pm"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        display: "none",
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginTop: 4,
+                        borderWidth: 1,
+                        borderColor: '#ddd',
+                        paddingHorizontal: 20,
+                        fontSize: 16,
+                        color: '#444',
+                        height: 44,
+                        marginBottom: 10,
+                        borderRadius: 2,
+                    }
+                }}
+                onDateChange={(date) => {
+
+                    setDate(moment(date, 'DD-MM-YYYY H:mm:ss:a').toDate());
+                }
+                }
             />
 
             <TouchableOpacity onPress={handleSubmit} style={styles.button}>
