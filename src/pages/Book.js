@@ -49,45 +49,48 @@ export default function Book({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Text style={styles.label}>DATA DE INTERESSE *</Text>
 
-            <DatePicker
-                style={{
-                    width: 300,
-                    marginBottom: 10
-                }}
-                date={date}
-                mode="datetime"
-                placeholder="select date"
-                format="DD-MM-YYYY H:mm:ss:a"
-                minDate="05-01-2018 00:00:00:pm"
-                maxDate="06-12-2019 00:00:00:pm"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                    dateIcon: {
-                        position: 'absolute',
-                        left: 0,
-                        top: 4,
-                        display: "none",
-                        marginLeft: 0
-                    },
-                    dateInput: {
-                        marginTop: 4,
-                        borderWidth: 1,
-                        borderColor: '#ddd',
-                        paddingHorizontal: 20,
-                        fontSize: 16,
-                        color: '#444',
-                        height: 44,
-                        marginBottom: 10,
-                        borderRadius: 2,
-                    }
-                }}
-                onDateChange={(date) => {
 
-                    setDate(moment(date, 'DD-MM-YYYY H:mm:ss:a').toDate());
-                }
-                }
-            />
+            <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderWidth: 1,
+                height: 44,
+                borderColor: '#ddd',
+                fontSize: 16,
+                borderRadius: 2
+            }}>
+                <DatePicker
+                    style={{
+                        margin: 30,
+                        width: 300,
+                        marginTop: 4,
+                    }}
+                    date={date}
+                    mode="datetime"
+                    placeholder="select date"
+                    format="DD-MM-YYYY H:mm:ss:a"
+                    minDate={new Date()}
+                    maxDate="06-12-2099 00:00:00:pm"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                        dateIcon: {
+                            //display: 'none'
+                            marginTop: 22,
+                        },
+                        dateInput: {
+                            borderWidth: 0,
+                            marginTop: 22,
+                        }
+                    }}
+                    onDateChange={(date) => {
+
+                        setDate(moment(date, 'DD-MM-YYYY H:mm:ss:a').toDate());
+                    }
+                    }
+                />
+            </View>
+
 
             <TouchableOpacity onPress={handleSubmit} style={styles.button}>
                 <Text style={styles.buttonText}>Solicitar reserva</Text>
@@ -111,7 +114,7 @@ const styles = StyleSheet.create({
     label: {
         fontWeight: 'bold',
         color: '#444',
-        marginBottom: 8,
+        marginBottom: 4,
         marginTop: 30,
     },
 
@@ -127,6 +130,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
+        marginTop: 30,
         height: 42,
         backgroundColor: '#f05a5b',
         justifyContent: 'center',
